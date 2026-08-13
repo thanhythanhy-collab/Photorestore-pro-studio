@@ -1,0 +1,6 @@
+{
+  "name": "Gemini PhotoRestore Pro Studio",
+  "description": "Bộ công cụ phục hồi ảnh cũ chuyên nghiệp bằng AI: Tạo Master Prompt 4 thành phần, phân tích ảnh đa phương tiện với Gemini, và chuẩn bị file in ấn chất lượng cao.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
