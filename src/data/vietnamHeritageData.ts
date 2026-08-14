@@ -1,0 +1,486 @@
+export interface HeritageItem {
+  id: string;
+  name: string;
+  category: 'women_attire' | 'men_military' | 'historical_settings' | 'vehicles_props' | 'vintage_tones';
+  era: '1950-1960' | '1960-1975' | '1975-1985' | '1986-1990' | 'all';
+  eraLabel: string;
+  region: 'North' | 'Central' | 'South' | 'Nationwide';
+  regionLabel: string;
+  tagline: string;
+  description: string;
+  promptVi: string;
+  promptEn: string;
+  keywords: string[];
+  colorPalette: { name: string; hex: string }[];
+  culturalNotes: string;
+  restorationAdvice: string;
+}
+
+export const HERITAGE_PERIODS = [
+  { id: 'all', label: 'Tất Cả Thời Kỳ (1950 - 1990)' },
+  { id: '1950-1960', label: '1950 – 1960 (Kháng Chiến & Hà Nội Tiếp Quản)' },
+  { id: '1960-1975', label: '1960 – 1975 (Sài Gòn Tân Thời & Miền Bắc)' },
+  { id: '1975-1985', label: '1975 – 1985 (Thời Kỳ Bao Cấp & Thống Nhất)' },
+  { id: '1986-1990', label: '1986 – 1990 (Đổi Mới & Thập Niên 90)' },
+];
+
+export const HERITAGE_CATEGORIES = [
+  { id: 'all', label: 'Tất Cả Danh Mục', count: 20 },
+  { id: 'women_attire', label: 'Trang Phục Nữ Truyền Thống', icon: 'Sparkles', count: 5 },
+  { id: 'men_military', label: 'Trang Phục Nam & Quân Phục', icon: 'Shield', count: 4 },
+  { id: 'historical_settings', label: 'Bối Cảnh & Kiến Trúc Xưa', icon: 'MapPin', count: 4 },
+  { id: 'vehicles_props', label: 'Xe Cổ & Đạo Cụ Hoài Niệm', icon: 'Bike', count: 4 },
+  { id: 'vintage_tones', label: 'Tone Màu & Chất Liệu Phim Cổ', icon: 'Film', count: 3 },
+];
+
+export const VIETNAM_HERITAGE_ITEMS: HeritageItem[] = [
+  // 1. Trang phục Nữ
+  {
+    id: 'aodai_hanoi_silk',
+    name: 'Áo Dài Lụa Hà Đông Cổ Cao (Hà Nội 1950 - 1960)',
+    category: 'women_attire',
+    era: '1950-1960',
+    eraLabel: '1950 – 1960',
+    region: 'North',
+    regionLabel: 'Hà Nội & Bắc Bộ',
+    tagline: 'Vẻ đẹp đoan trang, đài các của thiếu nữ Tràng An thời kỳ phục hòa',
+    description: 'Áo dài phom dáng truyền thống tà dài qua gối mềm mại, chất liệu lụa tơ tằm dệt thủ công hoặc gấm nhẹ, cổ cao kín đáo 3-4cm, cài khuy bấm bên nách phải, quần lụa trắng hoặc đen rộng ống. Tóc vấn trần hoặc uốn lượn sóng bồng bềnh chuẩn nét thanh lịch phụ nữ Hà thành.',
+    promptVi: 'Phục hồi trang phục áo dài truyền thống thiếu nữ Hà Nội thập niên 1950: Chất liệu vải lụa tơ tằm Hà Đông tự nhiên, độ rủ mềm mại, cổ đứng truyền thống cao kín đáo, chiết eo nhẹ tự nhiên không bó sát hiện đại. Quần lụa phi bóng mờ. Giữ nguyên 100% thần thái nét mặt Á Đông đoan trang, tóc uốn bồng cổ điển.',
+    promptEn: 'Restoring authentic 1950s Hanoi traditional Vietnamese Ao Dai dress: woven natural Ha Dong mulberry silk fabric with soft flowing drape, high closed mandarin collar (3-4cm), traditional side fastening, subtle natural waistline without modern tight contours. Paired with wide-leg matte silk trousers. Preserving 100% authentic Vietnamese facial bone structure and classical retro wavy bob hairstyle.',
+    keywords: ['traditional Hanoi Ao Dai', 'Ha Dong mulberry silk', 'mandarin collar', '1950s Vietnamese beauty', 'silk drape texture'],
+    colorPalette: [
+      { name: 'Trắng mỡ gà', hex: '#FDFBF7' },
+      { name: 'Xanh ngọc bích', hex: '#2E6F62' },
+      { name: 'Hồng phấn pastel', hex: '#E8B4B8' },
+      { name: 'Đen nhung lụa', hex: '#1C1B1B' },
+    ],
+    culturalNotes: 'Thời kỳ này áo dài Hà Nội chú trọng sự thanh nhã, kín đáo, tà áo không xẻ quá cao như thập niên sau và không may ôm sát body.',
+    restorationAdvice: 'Khi khử mốc hoặc ố trên áo dài, hãy giữ lại nếp gấp vải tự nhiên và độ bóng nhẹ của tơ tằm, tránh biến thành vải thun hoặc polyester hiện đại.'
+  },
+  {
+    id: 'aodai_saigon_raglan',
+    name: 'Áo Dài Raglan / Tân Thời Sài Gòn (1960 - 1975)',
+    category: 'women_attire',
+    era: '1960-1975',
+    eraLabel: '1960 – 1975',
+    region: 'South',
+    regionLabel: 'Sài Gòn & Nam Bộ',
+    tagline: 'Phong thái tân thời năng động, tay ráp raglan và cổ thuyền quyến rũ',
+    description: 'Kiểu áo dài cải tiến nối tay raglan giúp vai áo phẳng phiu không bị nhăn, chiết eo thon gọn tôn dáng phụ nữ thành thị Sài Gòn. Cổ áo đa dạng từ cổ thuyền bà Nhu, cổ tròn viền nhỏ đến cổ truyền thống thấp. Hoa văn in hoa li ti hoặc vải đơn sắc rực rỡ.',
+    promptVi: 'Phục dựng áo dài tân thời Sài Gòn thập niên 1960-1970: Kiểu tay raglan phẳng vai, chiết eo thanh mảnh, cổ thuyền hoặc cổ thấp 2cm, tà áo bay nhẹ duyên dáng. Tóc uốn phồng bồng bềnh kiểu retro Sài Gòn xưa, kính mát mắt mèo hoặc vòng cổ ngọc trai thanh lịch.',
+    promptEn: 'Restoring vintage 1960s-1970s Saigon retro Ao Dai: distinct raglan sleeve cut with smooth shoulder silhouette, tailored slim waistline, boat neckline or low 2cm collar, vibrant retro floral silk or chiffon texture. Authentic 1960s bouffant voluminous hairstyle, cat-eye sunglasses, classic Saigon urban elegance.',
+    keywords: ['1960s Saigon vintage Ao Dai', 'raglan sleeve Ao Dai', 'Saigon retro elegance', 'bouffant retro hair', 'chiffon silk texture'],
+    colorPalette: [
+      { name: 'Vàng mù tạt retro', hex: '#E3A857' },
+      { name: 'Xanh lơ biển', hex: '#4A90E2' },
+      { name: 'Đỏ mận chín', hex: '#8B1E3F' },
+      { name: 'Trắng tinh khôi', hex: '#FFFFFF' },
+    ],
+    culturalNotes: 'Áo dài Raglan do nhà may Dung ở Đa Kao sáng chế năm 1960 đã tạo nên bước ngoặt cách tân trang phục phụ nữ miền Nam.',
+    restorationAdvice: 'Tái tạo độ nét của các đường ráp nối tay chéo từ cổ áo xuống nách đặc trưng của kiểu tay Raglan.'
+  },
+  {
+    id: 'aobaba_southern_folk',
+    name: 'Áo Bà Ba Nam Bộ & Khăn Rằn (1950 - 1990)',
+    category: 'women_attire',
+    era: 'all',
+    eraLabel: 'Mọi Thời Kỳ',
+    region: 'South',
+    regionLabel: 'Nam Bộ Sông Nước',
+    tagline: 'Biểu tượng thuần hậu, mộc mạc và kiên cường của người phụ nữ phương Nam',
+    description: 'Áo bà ba xẻ tà hai bên hông, cổ tròn hoặc cổ tim nhẹ, hai túi vuông phía trước vạt áo. Chất liệu vải ú, gấm đơn sắc hoặc lụa đen bóng (lụa Tân Châu nhuộm mặc nưa). Đi kèm khăn rằn caro đen trắng hoặc xanh trắng quấn cổ và nón lá chóp nhọn.',
+    promptVi: 'Phục hồi trang phục áo bà ba truyền thống Nam Bộ: Vạt áo xẻ hông tự nhiên có 2 túi trước vạt, vải lụa tơ tằm đen bóng láng hoặc vải đũi mộc mạc, đường may thủ công tỉ mỉ. Khăn rằn caro đen trắng quấn cổ hờ hững, nón lá chóp nẹp chỉ tre truyền thống. Da mặt tự nhiên rám nắng nhẹ miền sông nước.',
+    promptEn: 'Restoring traditional southern Vietnamese Ao Ba Ba blouse: split side vents with two small front hem pockets, authentic shiny Tan Chau black silk or rustic raw cotton fabric texture, delicate handmade stitching. Paired with black-and-white checkered Khan Ran cotton scarf draped around neck, conical Non La palm leaf hat, natural warm sun-kissed Vietnamese complexion.',
+    keywords: ['Vietnamese Ao Ba Ba', 'Khan Ran checkered scarf', 'Non La leaf hat', 'Mekong delta folk attire', 'Tan Chau black silk'],
+    colorPalette: [
+      { name: 'Đen bóng mặc nưa', hex: '#111111' },
+      { name: 'Nâu sồng đất phù sa', hex: '#634735' },
+      { name: 'Xanh lá chuối non', hex: '#7BA05B' },
+      { name: 'Trắng ngà khăn rằn', hex: '#F0EFEB' },
+    ],
+    culturalNotes: 'Khăn rằn và áo bà ba là trang phục gắn liền với đời sống lao động và các nữ chiến sĩ du kích miền Tây Nam Bộ.',
+    restorationAdvice: 'Tránh làm bề mặt áo quá phẳng bóng như lụa satin công nghiệp; hãy thể hiện vân vải dệt đũi hoặc độ nhăn nhẹ chân thực.'
+  },
+  {
+    id: 'aotuthan_bacbo_heritage',
+    name: 'Áo Tứ Thân, Khăn Mỏ Quạ & Nón Quai Thao (Bắc Bộ Xưa)',
+    category: 'women_attire',
+    era: '1950-1960',
+    eraLabel: '1950 – 1960',
+    region: 'North',
+    regionLabel: 'Đồng Bằng Bắc Bộ',
+    tagline: 'Di sản văn hóa Kinh Bắc nghìn năm, duyên dáng và cổ kính',
+    description: 'Áo tứ thân gồm 4 vạt (2 vạt sau khâu liền, 2 vạt trước buông tự do hoặc thắt nút trước bụng), áo yếm bên trong (yếm hoa đào hoặc yếm nâu), thắt lưng lụa đào hoặc xanh thiên lý, khăn mỏ quạ trùm đầu đen tuyền và nón quai thao tròn đường kính lớn bằng lá cọ.',
+    promptVi: 'Phục chế trang phục Áo Tứ Thân Bắc Bộ: Vạt áo nhuộm màu củ nâu hoặc tơ lụa thô mộc, áo yếm lụa bên trong màu cánh sen hoặc trắng mỡ gà, thắt lưng lụa buông dải. Khăn vuông mỏ quạ đen tuyền thắt khéo ôm sát gò má, nón quai thao tròn quai lụa tơ tằm. Tái hiện thần thái dịu dàng của người phụ nữ nông thôn miền Bắc thời xưa.',
+    promptEn: 'Restoring authentic historical northern Vietnamese Ao Tu Than (four-panel tunic): rustic silk panels in natural earth tones, inner silk Yem halter top in soft lotus pink, colorful flowing silk sash belt. Black Khan Mo Qua triangular headscarf neatly framing cheeks, large round Non Quai Thao flat palm-leaf hat with silk ribbons. Authentic traditional northern Vietnamese folk portrait.',
+    keywords: ['Ao Tu Than', 'Non Quai Thao flat hat', 'Khan Mo Qua headscarf', 'Yem silk bodice', 'northern Vietnamese heritage'],
+    colorPalette: [
+      { name: 'Nâu củ nâu', hex: '#4A3525' },
+      { name: 'Hồng cánh sen', hex: '#C25975' },
+      { name: 'Xanh lá mạ', hex: '#87A96B' },
+      { name: 'Đen tuyền khăn', hex: '#0A0A0A' },
+    ],
+    culturalNotes: 'Áo tứ thân biểu trưng cho 4 thân phụ mẫu (cha mẹ đẻ và cha mẹ chồng), là trang phục lễ hội và đời sống đặc sắc vùng Kinh Bắc.',
+    restorationAdvice: 'Giữ nguyên độ tương phản giữa dải thắt lưng màu sắc và tà áo màu trầm cổ xưa.'
+  },
+  {
+    id: 'nusinh_dongkhanh_school',
+    name: 'Áo Dài Trắng Nữ Sinh Đồng Khánh / Gia Long (1960 - 1975)',
+    category: 'women_attire',
+    era: '1960-1975',
+    eraLabel: '1960 – 1975',
+    region: 'Central',
+    regionLabel: 'Huế & Sài Gòn',
+    tagline: 'Hình ảnh thanh thuần, trong trẻo của nữ sinh trường Đồng Khánh Huế và Gia Long Sài Gòn',
+    description: 'Áo dài lụa trắng hoặc vải thô trắng tinh khôi, quần trắng rộng gót, tà áo thướt tha tung bay trong gió. Tay ôm cặp da sách vở kiểu học trò xưa, đội nón lá bài thơ xứ Huế hoặc đi xe đạp mini cổ điển.',
+    promptVi: 'Tái tạo trang phục áo dài trắng tinh khôi nữ sinh trường xưa thập niên 1960: Vải lụa trắng nhẹ nhàng có độ rủ mềm mại, cổ áo cao 3cm thanh tao, tà áo bay nhẹ. Ôm cặp tài liệu da nâu cổ điển hoặc giữ nón lá bài thơ. Giữ nguyên thần thái trong sáng, nụ cười hiền hậu tự nhiên và làn da thiếu nữ thuần khiết.',
+    promptEn: 'Restoring vintage 1960s Vietnamese schoolgirl uniform: pure pristine white silk Ao Dai with elegant flowing drape, 3cm neat collar, wide white silk trousers. Holding vintage brown leather school satchel or delicate Hue poem conical hat (Non Bai Tho). Radiant innocent vintage youth portrait, natural glowing Asian skin tones.',
+    keywords: ['vintage white Ao Dai schoolgirl', 'Dong Khanh school uniform', 'Non Bai Tho conical hat', '1960s Vietnamese student', 'pure silk white drape'],
+    colorPalette: [
+      { name: 'Trắng tinh khôi', hex: '#FFFFFF' },
+      { name: 'Trắng sứ lụa', hex: '#F7F8F8' },
+      { name: 'Nâu da cặp sách', hex: '#7A4B29' },
+      { name: 'Xanh mực bút máy', hex: '#1C3F60' },
+    ],
+    culturalNotes: 'Hình ảnh tà áo dài trắng nữ sinh tan trường trên cầu Tràng Tiền (Huế) hay đường phố Sài Gòn là một trong những biểu tượng nghệ thuật nhiếp ảnh Việt Nam kinh điển.',
+    restorationAdvice: 'Cực kỳ cẩn trọng khi xử lý dải màu trắng để không bị cháy sáng (clipped highlights), giữ rõ từng đường gân vải lụa.'
+  },
+
+  // 2. Trang phục Nam & Quân phục
+  {
+    id: 'quanphuc_bodoicuhu_khangchien',
+    name: 'Quân Phục Bộ Đội Cụ Hồ (1950 - 1975)',
+    category: 'men_military',
+    era: '1960-1975',
+    eraLabel: '1950 – 1975',
+    region: 'Nationwide',
+    regionLabel: 'Toàn quốc',
+    tagline: 'Quân phục người lính giải phóng kiên trung với mũ cối, áo Tô Châu xanh cỏ úa',
+    description: 'Áo Tô Châu hoặc áo chẽn kaki xanh cỏ úa / xanh rêu bộ đội, hai túi ngực có nắp cài cúc, ve áo gắn quân hàm đỏ hoặc phù hiệu sao vàng. Mũ cối bọc lưới hoặc mũ tai bèo vải mềm, thắt lưng da sĩ quan khóa ngôi sao, ba lô cóc và dép lốp cao su Bác Hồ.',
+    promptVi: 'Phục hồi chuẩn xác quân phục Quân Đội Nhân Dân Việt Nam thời kháng chiến: Áo Tô Châu vải kaki xanh cỏ úa dày dặn, cúc áo màu xanh rêu, hai túi ngực có nắp thẳng thớm. Mũ cối bọc vải đan lưới cài huy hiệu sao vàng ở trán (hoặc mũ tai bèo vải dù). Dây thắt lưng da nâu. Giữ nguyên thần thái anh dũng, đôi mắt cương nghị, làn da khỏe khoắn dạn dày sương gió.',
+    promptEn: 'Restoring historical Vietnam War People’s Army military uniform: authentic olive-drab cotton-twill To Chau combat tunic with buttoned chest flap pockets, red collar insignia with golden star. Traditional green pith helmet (Mu Coi) with mesh camouflage netting and brass star badge (or soft jungle floppy hat Mu Tai Beo). Brown leather web belt. Resolute heroic facial expression, weathered realistic military portrait.',
+    keywords: ['Vietnam People Army uniform', 'olive green To Chau tunic', 'pith helmet Mu Coi', 'Mu Tai Beo jungle hat', 'historical military insignia'],
+    colorPalette: [
+      { name: 'Xanh cỏ úa quân nhu', hex: '#4B5320' },
+      { name: 'Xanh rêu Tô Châu', hex: '#3B4D3C' },
+      { name: 'Đỏ cờ quân hàm', hex: '#C8102E' },
+      { name: 'Vàng sao kim loại', hex: '#FFCD00' },
+    ],
+    culturalNotes: 'Chiếc mũ cối và áo xanh Tô Châu là biểu tượng bất tử của tinh thần yêu nước và lịch sử quân sự Việt Nam thế kỷ 20.',
+    restorationAdvice: 'Phục dựng chính xác huy hiệu quân hàm trên ve áo đỏ và ngôi sao vàng trên mũ, không để AI vẽ nhầm sang huy hiệu quân đội phương Tây.'
+  },
+  {
+    id: 'auphuc_trithuc_vintage',
+    name: 'Âu Phục Trí Thức & Công Chức Thời Xưa (1950 - 1980)',
+    category: 'men_military',
+    era: '1960-1975',
+    eraLabel: '1950 – 1980',
+    region: 'Nationwide',
+    regionLabel: 'Đô thị Hà Nội & Sài Gòn',
+    tagline: 'Phong cách lịch lãm của các thầy giáo, bác sĩ, nhà văn và giới trí thức xưa',
+    description: 'Bộ âu phục may đo thủ công: Áo sơ mi cổ đức vải poplin trắng hoặc kẻ sọc nhỏ, áo vest nỉ dạ hoặc tweed 2 nút cổ điển, ve áo bản vừa, quần tây ống đứng ủi ly thẳng tắp. Đi kèm kính mắt gọng đồi mồi tròn, bút máy cài túi ngực và đồng hồ đeo tay cổ.',
+    promptVi: 'Phục dựng trang phục âu phục nam giới trí thức Việt Nam thập niên 1960-1970: Áo sơ mi trắng may đo cổ đức thẳng thớm, cà vạt bản hẹp cổ điển, áo khoác vest dạ xám hoặc xanh navy may đo ôm phom tự nhiên. Kính mắt gọng đồi mồi tròn cổ điển, tóc chải ngôi 7/3 vuốt pomade nhẹ. Thần thái nho nhã, tri thức uyên bác.',
+    promptEn: 'Restoring vintage 1960s-1970s Vietnamese scholar and gentleman tailored suit: crisp white cotton dress shirt with classic spread collar, vintage narrow tie, wool tweed tailored blazer in charcoal grey or deep navy. Round tortoiseshell spectacles, classic 7/3 side-parted retro pomade hairstyle. Dignified intellectual expression, refined vintage portrait photography.',
+    keywords: ['vintage tailored suit Vietnam', 'tortoiseshell eyeglasses', '1960s gentleman portrait', 'side part vintage haircut', 'tweed wool blazer'],
+    colorPalette: [
+      { name: 'Xanh navy trầm', hex: '#1B263B' },
+      { name: 'Xám than chì', hex: '#333333' },
+      { name: 'Nâu đồi mồi', hex: '#5E3A1C' },
+      { name: 'Trắng kem sơ mi', hex: '#F8F9FA' },
+    ],
+    culturalNotes: 'Giới trí thức Hà Nội và Sài Gòn xưa chuộng phong thái chỉn chu, đoan trang, tôn trọng lễ nghi trong từng nếp áo.',
+    restorationAdvice: 'Tái tạo độ sắc nét của đường ly quần tây và đường ve áo vest may đo thủ công.'
+  },
+  {
+    id: 'aodai_nam_nguthan',
+    name: 'Áo Dài Ngũ Thân & Khăn Đóng Nam Giới (Truyền Thống)',
+    category: 'men_military',
+    era: '1950-1960',
+    eraLabel: '1950 – 1960',
+    region: 'North',
+    regionLabel: 'Bắc Bộ & Cố Đô Huế',
+    tagline: 'Trang phục chuẩn mực của các cụ đồ, bậc trưởng thượng trong lễ tết và gia tộc',
+    description: 'Áo dài ngũ thân tay chẽn hoặc tay thụng chất liệu lụa tơ, đũi hoặc gấm vân mây chữ Thọ. Cổ đứng 4cm gài 5 nút đồng/gỗ bên phải tượng trưng cho ngũ thường (Nhân - Lễ - Nghĩa - Trí - Tín). Đội khăn đóng xếp nếp quấn tròn trên đầu, đi guốc mộc hoặc giày vải.',
+    promptVi: 'Phục hồi trang phục Áo Dài Ngũ Thân Nam Giới và Khăn Đóng truyền thống: Vải gấm dệt hoa văn chữ Thọ chìm màu xanh lam thẫm hoặc đen huyền, cổ đứng cứng cáp đính 5 khuy cài bên nách phải. Khăn đóng đen vấn nhiều lớp xếp nếp đều đặn trên đầu. Thần thái tôn nghiêm, đĩnh đạc của bậc trưởng lão truyền thống Việt Nam.',
+    promptEn: 'Restoring traditional historical Vietnamese male Ngu Than tunic and Khan Dong turban: rich brocade or damask silk featuring subtle woven Longevity symbols in midnight blue or black, standing 4cm mandarin collar with 5 side brass buttons. Finely wrapped black tiered fabric head turban (Khan Dong). Venerable, stately, and dignified patriarchal Vietnamese portrait.',
+    keywords: ['Ao Dai Ngu Than male', 'Khan Dong turban', 'traditional Vietnamese patriarch', 'brocade silk pattern', 'five button tunic'],
+    colorPalette: [
+      { name: 'Xanh lam gấm thẫm', hex: '#1D2A44' },
+      { name: 'Đen nhung gấm', hex: '#121212' },
+      { name: 'Đồng thau khuy cài', hex: '#C5A059' },
+      { name: 'Tím hoa cà cung đình', hex: '#583759' },
+    ],
+    culturalNotes: 'Năm cúc áo đại diện cho Ngũ Luân (Phụ tử, Quân thần, Phu phụ, Huynh đệ, Bằng hữu) và Ngũ Thường.',
+    restorationAdvice: 'Cần giữ rõ chi tiết dệt hoa văn chìm trên nền vải gấm, không để AI làm bẹt màu thành áo trơn.'
+  },
+  {
+    id: 'trangphuc_baocap_congnhan',
+    name: 'Trang Phục Thời Bao Cấp (1975 - 1985)',
+    category: 'men_military',
+    era: '1975-1985',
+    eraLabel: '1975 – 1985',
+    region: 'Nationwide',
+    regionLabel: 'Toàn quốc thời kỳ Bao Cấp',
+    tagline: 'Kỷ niệm thời kỳ tem phiếu, áo sơ mi bảo hộ xanh công nhân và dép tổ ong',
+    description: 'Áo sơ mi vải bạt bông / kaki xanh công nhân, áo phông dệt kim Đông Xuân hoặc áo sơ mi trắng giặt sờn cổ, quần tây xanh đen sắn gấu. Mũ lưỡi trai vải bạt hoặc mũ nan, dép rọ nhựa Tiền Phong / dép tổ ong, đồng hồ Poljot hoặc Seiko chém cạnh.',
+    promptVi: 'Phục hồi trang phục nam giới thời kỳ Bao Cấp Việt Nam (1975-1985): Áo sơ mi xanh bảo hộ vải kaki hoặc áo sơ mi trắng dệt sợi bông tự nhiên, ngực áo có thể cài bút máy Hồng Hà. Quần tây màu xanh tím than vải xi hoặc kaki mộc. Đeo đồng hồ cơ dây da hoặc kim loại cổ điển. Thần thái chân chất, mộc mạc và tràn đầy nghị lực.',
+    promptEn: 'Restoring authentic Vietnamese Subsidy Era (Bao Cap 1975-1985) attire: worker blue utilitarian cotton work-shirt or simple woven white poplin shirt with a classic fountain pen in pocket. Navy utility twill trousers. Vintage mechanical wristwatch (Poljot / Seiko). Honest, resilient, and nostalgic portrait of everyday life in historical Vietnam.',
+    keywords: ['Bao Cap subsidy era', 'vintage Vietnamese worker shirt', 'Hong Ha fountain pen', 'vintage mechanical watch', 'utilitarian cotton texture'],
+    colorPalette: [
+      { name: 'Xanh công nhân', hex: '#2C5E8A' },
+      { name: 'Xanh tím than', hex: '#1F2438' },
+      { name: 'Trắng sợi bông', hex: '#EAE6DF' },
+      { name: 'Nâu sờn bạt', hex: '#6E5C4F' },
+    ],
+    culturalNotes: 'Thời kỳ tem phiếu gắn liền với ký ức của hàng triệu gia đình Việt Nam với đức tính tiết kiệm và cần lao.',
+    restorationAdvice: 'Giữ lại chất liệu thô mộc của sợi vải cotton thời xưa, không tăng bóng quá mức.'
+  },
+
+  // 3. Bối cảnh Lịch sử & Kiến trúc
+  {
+    id: 'setting_phoco_hanoi',
+    name: 'Phố Cổ Hà Nội & Bờ Hồ Thập Niên 1950 - 1980',
+    category: 'historical_settings',
+    era: '1950-1960',
+    eraLabel: '1950 – 1980',
+    region: 'North',
+    regionLabel: 'Hà Nội 36 Phố Phường',
+    tagline: 'Mái ngói âm dương rêu phong, tường vôi vàng cổ kính và đường tàu điện leng keng',
+    description: 'Bối cảnh phố cổ Hà Nội với những ngôi nhà ống mái ngói vảy cá phủ rêu, tường quét vôi vàng đặc trưng kiến trúc thuộc địa Pháp pha trộn bản địa, cửa gỗ sổ chớp sơn xanh lá cây ngả màu, cột đèn sắt cổ điển và tiếng chuông tàu điện Bờ Hồ.',
+    promptVi: 'Tái dựng bối cảnh phố cổ Hà Nội thập niên 1960-1970: Nhà cổ mái ngói rêu phong, tường vôi vàng cổ kính bạc màu thời gian, cửa sổ chớp gỗ sơn xanh lam ngả rêu. Vỉa hè lát đá gạch chỉ, hàng cây sấu cổ thụ rợp bóng mát, xa xa có bóng tàu điện bánh sắt leng keng. Ánh sáng tự nhiên dịu nhẹ mùa thu Hà Nội.',
+    promptEn: 'Reconstructing historical Hanoi Old Quarter background (1960s-1970s): weathered colonial French-Vietnamese tube houses with mossy terracotta fish-scale roof tiles, aged mustard-yellow lime-wash plaster walls, faded green wooden louvered shutters. Brick pavements under grand canopy of ancient shade trees, nostalgic vintage streetcar tram tracks in soft autumn Hanoi golden hour light.',
+    keywords: ['Hanoi Old Quarter 1970s', 'yellow lime-wash wall', 'terracotta tile roof', 'vintage French colonial shutters', 'Hanoi autumn light'],
+    colorPalette: [
+      { name: 'Vàng vôi cổ kính', hex: '#D4AF37' },
+      { name: 'Xanh cửa chớp cổ', hex: '#3B6E58' },
+      { name: 'Đỏ ngói vảy cá', hex: '#A7523C' },
+      { name: 'Xám rêu phong', hex: '#5A6351' },
+    ],
+    culturalNotes: 'Vôi vàng và cửa chớp xanh là tông màu linh hồn của kiến trúc đô thị Hà Nội thế kỷ 20.',
+    restorationAdvice: 'Khi làm nét hậu cảnh, giữ đúng độ mờ xóa phông (bokeh) tự nhiên của ống kính cổ điển, tránh để AI sinh kiến trúc cao tầng hiện đại.'
+  },
+  {
+    id: 'setting_saigon_retrostreet',
+    name: 'Đô Thị Sài Gòn Thập Niên 1960 - 1970 (Hòn Ngọc Viễn Đông)',
+    category: 'historical_settings',
+    era: '1960-1975',
+    eraLabel: '1960 – 1975',
+    region: 'South',
+    regionLabel: 'Đô Thành Sài Gòn',
+    tagline: 'Biển hiệu chữ vẽ tay typography retro, hàng hiên rợp nắng và nhịp sống đô thị tân thời',
+    description: 'Đại lộ Lê Lợi, Nguyễn Huệ, bùng binh chợ Bến Thành hay bến Bạch Đằng với các tòa nhà kiến trúc Art Deco, biển hiệu quảng cáo vẽ tay bằng cọ sơn font chữ Retro độc đáo, bóng dáng xe Vespa, xe lam 3 bánh và hàng me rợp bóng mát.',
+    promptVi: 'Phục dựng bối cảnh đường phố Sài Gòn xưa thập niên 1960: Kiến trúc Art Deco nhiệt đới, biển hiệu cửa hàng vẽ tay bằng sơn kiểu typography retro Sài Gòn xưa. Dòng người thanh lịch qua lại, hàng cây me bay lá vàng, ánh nắng vàng rực rỡ nhiệt đới phương Nam. Không gian hoài niệm điện ảnh sống động.',
+    promptEn: 'Reconstructing vintage 1960s Saigon street cityscape: tropical Art Deco colonial architecture, hand-painted retro Vietnamese commercial signboards with authentic typography. Elegant pedestrians in vintage attire, tamarind tree lined boulevards with dappled southern golden sunlight. Cinematic nostalgic Kodachrome 1960s atmosphere.',
+    keywords: ['1960s Saigon street scene', 'retro Saigon typography', 'Art Deco architecture Vietnam', 'tropical southern sunlight', 'Kodachrome vintage look'],
+    colorPalette: [
+      { name: 'Vàng nắng Sài Gòn', hex: '#F4C430' },
+      { name: 'Xanh lam biển hiệu', hex: '#185A9D' },
+      { name: 'Đỏ son retro', hex: '#D83A56' },
+      { name: 'Trắng kem vôi', hex: '#F9F6F0' },
+    ],
+    culturalNotes: 'Typography biển hiệu Sài Gòn xưa là một di sản mỹ thuật ứng dụng độc đáo được vẽ hoàn toàn bằng tay của các họa sĩ đường phố.',
+    restorationAdvice: 'Cấm xuất hiện xe hơi đời mới, biển quảng cáo kỹ thuật số hoặc cột đèn LED hiện đại.'
+  },
+  {
+    id: 'setting_langque_dongbang',
+    name: 'Làng Quê Bắc Bộ & Nhà Ba Gian Truyền Thống',
+    category: 'historical_settings',
+    era: 'all',
+    eraLabel: 'Mọi Thời Kỳ',
+    region: 'North',
+    regionLabel: 'Nông Thôn Đồng Bằng Bắc Bộ',
+    tagline: 'Cổng làng rêu phong, giếng nước gốc đa, sân gạch đỏ và nhà gỗ 3 gian 2 chái',
+    description: 'Khung cảnh làng quê Việt Nam thanh bình với cây đa cổ thụ, bến nước giếng làng, sân gạch đỏ phơi thóc, nhà ngói ba gian cột gỗ lim hoặc nhà tranh vách đất mộc mạc, rặng tre xanh rì rào bên bờ ao sen.',
+    promptVi: 'Tái hiện không gian làng quê Bắc Bộ truyền thống: Nhà gỗ 3 gian mái ngói ta rêu phong, hiên nhà có rèm tre rủ, sân gạch đỏ nung phơi rơm vàng. Bờ ao hoa sen, rặng tre xanh đu đưa trong gió chiều, lu nước mưa bằng sành góc sân. Ánh sáng hoàng hôn ấm áp đậm hồn quê hương.',
+    promptEn: 'Reconstructing traditional northern Vietnamese rural village setting: 3-compartment antique wooden house with weathered clay tile roof, bamboo blinds hanging at verandah, red brick courtyard. Lotus pond in foreground, gentle swaying bamboo grove, terracotta rainwater urn in corner. Warm golden hour peaceful countryside atmosphere.',
+    keywords: ['northern Vietnamese village', 'traditional 3-room wooden house', 'red brick courtyard', 'bamboo grove pond', 'peaceful countryside lighting'],
+    colorPalette: [
+      { name: 'Đỏ gạch nung', hex: '#B85D43' },
+      { name: 'Nâu gỗ lim', hex: '#483C32' },
+      { name: 'Xanh tre trúc', hex: '#4F7942' },
+      { name: 'Vàng rơm rạ', hex: '#E4D00A' },
+    ],
+    culturalNotes: 'Nhà ba gian là kiến trúc hạt nhân nuôi dưỡng tâm hồn và nếp sống tam đại đồng đường của người Việt.',
+    restorationAdvice: 'Tái tạo chuẩn kết cấu mái ngói ta hình mũi hài hoặc ngói vảy, không thay bằng ngói tôn xi măng.'
+  },
+  {
+    id: 'setting_studio_vintage_phongnhung',
+    name: 'Phòng Chụp Ảnh Studio Cổ Điển Thập Niên 1970 - 1980',
+    category: 'historical_settings',
+    era: '1975-1985',
+    eraLabel: '1970 – 1985',
+    region: 'Nationwide',
+    regionLabel: 'Tiệm Chụp Ảnh Hiệu Cũ',
+    tagline: 'Phông nền màn nhung vẽ tranh thủy mặc, ghế mây mạ vecni và lọ hoa lay-ơn',
+    description: 'Bối cảnh bên trong các tiệm chụp ảnh viện xưa (như tiệm ảnh Quốc Tế, tiệm ảnh Mỹ Lai, hiệu ảnh Hàng Đào): Phông nền vải canvas vẽ tay phong cảnh hoa lá non bộ mờ ảo, ghế bành bọc nỉ hoặc ghế mây uốn mỹ nghệ, bàn con đặt bình hoa huệ tây hoặc hoa lay-ơn.',
+    promptVi: 'Phục dựng bối cảnh studio chụp ảnh hoài niệm thập niên 1970-1980: Phông nền phông vẽ tay cảnh sơn thủy mơ màng theo phong cách ảnh viện xưa, ghế tựa mây uốn vecni nâu bóng, bàn trà nhỏ có lọ hoa lay-ơn hoặc hoa loa kèn. Đèn rọi studio chiếu sáng mềm mại tạo khối khối khuôn mặt thanh thoát.',
+    promptEn: 'Restoring vintage 1970s-1980s Vietnamese photography studio setting: hand-painted scenic canvas backdrop with classical landscape impression, varnished vintage rattan armchair, small side table with gladiolus or white lily vase. Soft vintage studio key lighting sculpting elegant facial contours.',
+    keywords: ['vintage photo studio Vietnam', 'hand-painted scenic backdrop', 'rattan armchair vintage', 'studio lighting retro', 'gladiolus vase prop'],
+    colorPalette: [
+      { name: 'Đỏ mận phông nhung', hex: '#681E2E' },
+      { name: 'Nâu mây vecni', hex: '#8B5A2B' },
+      { name: 'Xanh sơn thủy mờ', hex: '#708090' },
+      { name: 'Trắng hoa lay-ơn', hex: '#F5F5F0' },
+    ],
+    culturalNotes: 'Các hiệu ảnh xưa là nơi lưu giữ những khoảnh khắc trọng đại nhất đời người: ảnh cưới, ảnh gia đình tết, ảnh mừng thọ.',
+    restorationAdvice: 'Giữ ánh sáng tản mềm (soft diffusion) đặc trưng của đèn dù studio thời xưa.'
+  },
+
+  // 4. Phương tiện & Đạo cụ Hoài niệm
+  {
+    id: 'prop_xe_vespa_sprint_mobylette',
+    name: 'Xe Cổ: Vespa Sprint, Mobylette & Honda Dame (1960 - 1975)',
+    category: 'vehicles_props',
+    era: '1960-1975',
+    eraLabel: '1960 – 1975',
+    region: 'South',
+    regionLabel: 'Sài Gòn & Đô Thị Miền Nam',
+    tagline: 'Biểu tượng xe máy cổ lừng danh trên đường phố Sài Gòn hoa lệ',
+    description: 'Chiếc xe Vespa Sprint 150 bạc / xanh ngọc, xe Mobylette đũa màu xanh xám của Pháp, hoặc Honda Dame c50 đỏ mận với yếm trắng thanh lịch. Chi tiết kim loại mạ chrome sáng bóng, gương chiếu hậu tròn cổ điển.',
+    promptVi: 'Phục dựng chi tiết xe máy cổ điển thập niên 1960 (Vespa Sprint / Honda Dame / Mobylette): Nước sơn nguyên bản bóng mờ màu xanh bạc hoặc đỏ mận, yếm xe trắng kem, đèn pha tròn viền kim loại mạ crom sáng, yên xe bọc da đôi cổ điển. Tái hiện độ bóng kim loại và vân máy cơ khí chính xác.',
+    promptEn: 'Restoring authentic 1960s vintage motorcycle / scooter in Vietnam: classic Piaggio Vespa Sprint 150 or vintage Honda Super Cub Dame C50 in metallic silver-blue or maroon, chrome-trimmed round headlight, cream leg-shield, two-tone leather seat. Accurate mechanical engine textures and vintage chrome reflections.',
+    keywords: ['vintage Vespa Sprint 1968', 'Honda Dame C50 vintage', 'Mobylette antique moped', 'chrome headlight trim', 'retro motorcycle Vietnam'],
+    colorPalette: [
+      { name: 'Bạc kim loại Vespa', hex: '#C0C0C0' },
+      { name: 'Xanh ngọc cổ điển', hex: '#4E878C' },
+      { name: 'Đỏ mận Honda Dame', hex: '#7A1C28' },
+      { name: 'Kem ngà yếm xe', hex: '#FFFDD0' },
+    ],
+    culturalNotes: 'Chiếc Vespa Sprint hay Honda Dame từng là niềm mơ ước và biểu tượng phong lưu của thanh niên thành thị xưa.',
+    restorationAdvice: 'Làm nổi bật độ phản chiếu kim loại trên viền đèn pha và tay lái xe.'
+  },
+  {
+    id: 'prop_xedap_phuonghoang',
+    name: 'Xe Đạp Phượng Hoàng (Phoenix) Cánh Én (1970 - 1985)',
+    category: 'vehicles_props',
+    era: '1975-1985',
+    eraLabel: '1970 – 1985',
+    region: 'North',
+    regionLabel: 'Miền Bắc Thời Bao Cấp',
+    tagline: '"Tài sản quý như ô tô" thời tem phiếu của người dân miền Bắc',
+    description: 'Xe đạp Phượng Hoàng (Trung Quốc) màu đen bóng hoặc xanh lục đậm, khung xe gắn logo chim phượng hoàng bằng đồng mạ, ghi-đông cánh én mạ sáng, chuông đồng tròn trên tay lái, đèn dynamo phát điện gắn bánh trước, khóa chữ U phía sau.',
+    promptVi: 'Phục hồi xe đạp Phượng Hoàng cổ thời Bao Cấp: Khung xe sơn đen bóng nguyên bản đính biểu tượng huy hiệu Phượng Hoàng ánh đồng, ghi đông mạ crom sáng bóng có chuông bấm kim loại, gac-ba-ga chắc chắn phía sau, đèn dynamo cọ lốp bánh trước. Tái hiện độ sắc sảo từng nan hoa và xích líp.',
+    promptEn: 'Restoring authentic vintage Phoenix (Phuong Hoang) bicycle from 1970s Vietnam: glossy black steel frame with brass phoenix headbadge, polished chrome gull-wing handlebars with mechanical brass bell, vintage tire dynamo headlight, wire spokes and sturdy rear luggage rack. Accurate historical period vehicle details.',
+    keywords: ['vintage Phoenix bicycle', 'Phuong Hoang bike Vietnam', 'brass headbadge', 'chrome handlebar bell', 'subsidy era prized possession'],
+    colorPalette: [
+      { name: 'Đen bóng khung xe', hex: '#141414' },
+      { name: 'Đồng thau huy hiệu', hex: '#B5A642' },
+      { name: 'Bạc Crom ghi đông', hex: '#E5E4E2' },
+      { name: 'Đỏ phản quang', hex: '#ED2939' },
+    ],
+    culturalNotes: 'Thời bao cấp, mỗi chiếc xe đạp Phượng Hoàng đều phải đăng ký biển số và có giá trị bằng cả mảnh đất.',
+    restorationAdvice: 'Tránh để AI vẽ biến dạng nan hoa bánh xe hoặc biến thành xe đạp thể thao địa hình hiện đại.'
+  },
+  {
+    id: 'prop_quattre_nonla_khanran',
+    name: 'Bộ Đạo Cụ: Nón Lá Bài Thơ, Quạt Nan Tre & Khăn Lụa',
+    category: 'vehicles_props',
+    era: 'all',
+    eraLabel: 'Mọi Thời Kỳ',
+    region: 'Nationwide',
+    regionLabel: 'Toàn quốc',
+    tagline: 'Những đạo cụ cầm tay tôn vinh nét duyên ngầm của người phụ nữ Việt',
+    description: 'Nón lá bài thơ chằm chỉ cước trong suốt khi soi lên nắng thấy hình cầu Tràng Tiền và câu thơ, nón quai thao dải lụa điều, quạt nan tre xòe mềm mại, ví cầm tay đan hạt cườm thập niên 70.',
+    promptVi: 'Phục chế đạo cụ truyền thống: Chiếc nón lá cọ chằm tỉ mỉ từng đường kim mũi chỉ, quai nón bằng lụa mềm màu tím hoa cà hoặc hồng đào. Quạt nan tre đan tay mộc mạc hoặc ví cầm tay thêu chỉ kim tuyến vintage. Giữ trọn vẹn nét thanh tao trong cử chỉ cầm đạo cụ.',
+    promptEn: 'Restoring authentic handheld Vietnamese cultural accessories: delicate palm leaf conical Non La hat with intricate bamboo rib stitching and soft lavender silk chin strap. Rustic hand-woven bamboo folding fan or vintage embroidered clutch. Natural graceful posture holding traditional props.',
+    keywords: ['Non La palm hat', 'bamboo folding fan', 'silk chin strap', 'embroidered vintage clutch', 'Vietnamese traditional accessories'],
+    colorPalette: [
+      { name: 'Vàng lá cọ khô', hex: '#E6D7B9' },
+      { name: 'Tím quai lụa', hex: '#7D5C7B' },
+      { name: 'Xanh nan tre', hex: '#6B8E23' },
+      { name: 'Hồng phấn quai nón', hex: '#F4C2C2' },
+    ],
+    culturalNotes: 'Chiếc nón lá bài thơ là sự kết hợp tài tình giữa thủ công mỹ nghệ và thi ca cung đình Huế.',
+    restorationAdvice: 'Tái hiện vân gân lá cọ tự nhiên và độ mỏng nhẹ của nón khi đón ánh sáng xuyên qua.'
+  },
+  {
+    id: 'prop_dai_radio_cassette_national',
+    name: 'Đài Radio Cassette National & Quạt Tai Voi Liên Xô (1975 - 1990)',
+    category: 'vehicles_props',
+    era: '1975-1985',
+    eraLabel: '1975 – 1990',
+    region: 'Nationwide',
+    regionLabel: 'Gia Đình Thập Niên 80',
+    tagline: 'Kỷ vật phòng khách gia đình thời kỳ mở cửa và giao lưu quốc tế',
+    description: 'Chiếc đài cassette National vỏ nhựa đỏ/bạc với 2 hộc băng cassette, ăng-ten rút dài; quạt bàn tai voi (quạt hoa sen) của Liên Xô cánh cao su mềm màu trắng đục; ấm trà gốm Bát Tràng và phích nước Rạng Đông in hình hoa sen.',
+    promptVi: 'Phục dựng đồ vật kỷ niệm gia đình Việt Nam thập niên 1980: Chiếc đài radio cassette National màu bạc với các nút bấm cơ học, ăng-ten kim loại vươn cao. Phích nước Rạng Đông in hoa sen và bộ ấm chén trà Bát Tràng tráng men ngọc đặt trên bàn gỗ gụ. Ánh sáng ấm cúng của phòng khách gia đình xưa.',
+    promptEn: 'Restoring 1980s Vietnamese household heirloom items: vintage National dual-cassette boombox radio with mechanical switches and metallic telescopic antenna. Iconic Rang Dong thermos flask with floral print and traditional Bat Trang ceramic tea set on dark rosewood coffee table. Warm nostalgic family room ambiance.',
+    keywords: ['vintage National cassette radio', 'Rang Dong vintage thermos', 'Bat Trang ceramic tea set', '1980s Vietnamese living room', 'nostalgic household props'],
+    colorPalette: [
+      { name: 'Bạc kim loại đài', hex: '#D3D3D3' },
+      { name: 'Đỏ phích nước', hex: '#A82020' },
+      { name: 'Nâu gỗ gụ', hex: '#4A2E18' },
+      { name: 'Xanh men ngọc Bát Tràng', hex: '#7BA098' },
+    ],
+    culturalNotes: 'Những món đồ điện tử thời kỳ này là niềm tự hào của cả gia đình, thường được phủ khăn ren trang trọng.',
+    restorationAdvice: 'Giữ lại chất cảm bề mặt nhựa và kim loại bóng mờ của thập niên 80.'
+  },
+
+  // 5. Tone màu & Chất liệu phim
+  {
+    id: 'tone_kodak_tri_x_blackwhite',
+    name: 'Tone Phim Đen Trắng Kodak Tri-X 400 & Giấy Bạc Muối',
+    category: 'vintage_tones',
+    era: '1950-1960',
+    eraLabel: '1950 – 1970',
+    region: 'Nationwide',
+    regionLabel: 'Kỹ Thuật Buồng Tối Cổ Điển',
+    tagline: 'Độ tương phản đen trắng sâu thẳm, hạt phim mịn (fine grain) và sắc độ xám mượt mà',
+    description: 'Chất lượng ảnh rửa buồng tối cổ điển (Silver Gelatin Print) trên giấy bạc muối có độ sâu quang học tuyệt hảo, vùng tối đen tuyền nhưng không mất chi tiết, vùng sáng mềm mại, hạt grain mịn màng đầy chất điện ảnh.',
+    promptVi: 'Phục chế theo phong cách ảnh đen trắng nghệ thuật buồng tối cổ điển (Classic Black & White Silver Gelatin Print): Sắc độ xám chuyển tầng mượt mà (rich tonal range), tương phản sâu thẳm, hạt grain phim 35mm mịn màng tự nhiên. Khử sạch toàn bộ vết mốc ố vàng nhưng giữ nguyên 100% cảm xúc hoài niệm đen trắng nguyên bản.',
+    promptEn: 'Restoring in authentic masterclass Black & White Silver Gelatin print style: deep rich velvety blacks, silky smooth grayscale tonal gradient, fine analog 35mm film grain structure (Kodak Tri-X 400 look). Crisp focus on eyes and facial skin texture while maintaining timeless monochrome photographic soul.',
+    keywords: ['Silver Gelatin Print style', 'Kodak Tri-X 400 film grain', 'rich black and white tonal range', 'vintage darkroom print', 'analog monochrome soul'],
+    colorPalette: [
+      { name: 'Đen tuyền buồng tối', hex: '#0D0D0D' },
+      { name: 'Xám chì trung tính', hex: '#555555' },
+      { name: 'Xám bạc ánh sáng', hex: '#B0B0B0' },
+      { name: 'Trắng giấy bạc muối', hex: '#F0EFEA' },
+    ],
+    culturalNotes: 'Ảnh đen trắng rửa buồng tối của các nghệ sĩ nhiếp ảnh bậc thầy Việt Nam luôn có độ tương phản và chiều sâu vô cùng độc đáo.',
+    restorationAdvice: 'Dành cho những người muốn giữ nguyên vẹn cảm xúc ảnh đen trắng gốc mà không muốn tô màu AI.'
+  },
+  {
+    id: 'tone_agfacolor_kodachrome_warm',
+    name: 'Tone Màu Phim Agfacolor / Kodachrome Hoài Niệm (1960 - 1975)',
+    category: 'vintage_tones',
+    era: '1960-1975',
+    eraLabel: '1960 – 1975',
+    region: 'Nationwide',
+    regionLabel: 'Nhiếp Ảnh Màu Thời Kỳ Đầu',
+    tagline: 'Sắc vàng ấm áp của nắng nhiệt đới, da mặt hồng hào tự nhiên và màu đỏ tươi retro',
+    description: 'Tông màu của các thước phim màu kinh điển Kodachrome 64 và Agfacolor chụp tại Việt Nam thập niên 60-70: Sắc đỏ ấm, xanh lá ngả vàng mộc, bầu trời xanh ngọc dịu và làn da người Á Đông hồng hào khỏe khoắn.',
+    promptVi: 'Tô màu và phục hồi theo bảng màu phim màu cổ điển Kodachrome 64 / Agfacolor thập niên 1960-1970: Tông màu ấm áp, da mặt người Việt Nam ánh hồng tự nhiên giàu sức sống. Màu sắc trang phục rực rỡ nhưng trầm ấm (muted rich colors), không bị bệt màu kỹ thuật số. Giữ độ hạt analog nhẹ nhàng.',
+    promptEn: 'Colorizing and restoring with authentic 1960s-1970s Kodachrome 64 / Agfacolor vintage film color profile: warm golden undertones, glowing lifelike Asian skin tones with subtle natural blush, muted rich primary hues (vintage vermillion, emerald green, mustard yellow). Soft analog film warmth without digital oversaturation.',
+    keywords: ['Kodachrome 64 vintage color profile', 'Agfacolor 1970s palette', 'natural warm Asian skin tones', 'analog color restoration', 'cinematic retro colorization'],
+    colorPalette: [
+      { name: 'Đỏ son Kodachrome', hex: '#C0392B' },
+      { name: 'Vàng hổ phách', hex: '#D4AC0D' },
+      { name: 'Xanh mòng két', hex: '#16A085' },
+      { name: 'Hồng da khỏe khoắn', hex: '#F5CBA7' },
+    ],
+    culturalNotes: 'Những bức ảnh màu chụp Sài Gòn và Hà Nội xưa trên phim Agfa/Kodak luôn mang một vẻ đẹp ấm áp, gợi nhớ ký ức tuổi thơ.',
+    restorationAdvice: 'Không để màu sắc bị rực chói (oversaturated) kiểu bộ lọc Instagram hiện đại.'
+  },
+  {
+    id: 'tone_sepia_vintage_postcard',
+    name: 'Tone Nâu Cổ Điển Sepia Bưu Thiếp Xưa (Đầu Thế Kỷ 20)',
+    category: 'vintage_tones',
+    era: '1950-1960',
+    eraLabel: '1950 Trở Về Trước',
+    region: 'Nationwide',
+    regionLabel: 'Bưu Ảnh Đông Dương',
+    tagline: 'Sắc nâu ấm trầm mặc, viền răng cưa bưu thiếp và chất giấy xơ cổ kính',
+    description: 'Sắc độ nâu ấm Sepia gợi nhớ các tấm bưu thiếp Đông Dương cổ điển (Indochine vintage postcards). Tông màu trầm lắng tạo cảm giác tôn kính, trang trọng cho ảnh thờ gia tiên hoặc chân dung tiền nhân.',
+    promptVi: 'Phục chế theo tone màu nâu ấm Sepia bưu thiếp Đông Dương cổ điển: Dải sắc độ nâu cà phê ấm áp chuyển từ tối sẫm sang sáng kem ngà. Nét mặt sắc sảo và tôn nghiêm, giữ lại cảm giác trang trọng cổ kính của bức ảnh truyền đời gia tộc. Khử nứt rách nhưng lưu giữ linh hồn thời gian.',
+    promptEn: 'Restoring in timeless warm Sepia tone Indochine vintage postcard aesthetic: velvety coffee-brown shadows transitioning into soft warm ivory highlights. Dignified, ancestral portrait fidelity, sharp facial features with antique textured depth. Preserving solemn historical dignity for family heirlooms.',
+    keywords: ['warm Sepia tone restoration', 'Indochine vintage postcard', 'ancestral family portrait', 'coffee brown monochrome', 'timeless heritage photography'],
+    colorPalette: [
+      { name: 'Nâu cà phê sẫm', hex: '#3E2723' },
+      { name: 'Nâu Sepia ấm', hex: '#795548' },
+      { name: 'Kem ngà giấy cổ', hex: '#D7CCC8' },
+      { name: 'Trắng ánh vàng', hex: '#FFF8E1' },
+    ],
+    culturalNotes: 'Tone Sepia rất thích hợp cho ảnh chân dung ông bà, cụ tổ thờ phụng trên bàn thờ gia tiên của người Việt.',
+    restorationAdvice: 'Đảm bảo độ nét cao ở đôi mắt để chân dung toát lên thần thái sống động dù trong gam màu đơn sắc.'
+  }
+];

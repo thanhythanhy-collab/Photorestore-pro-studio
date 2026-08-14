@@ -3,6 +3,7 @@ import { Header } from './components/Header';
 import { MasterPromptStructureCard } from './components/MasterPromptStructureCard';
 import { PromptBuilder } from './components/PromptBuilder';
 import { PhotoAnalyzer } from './components/PhotoAnalyzer';
+import { VietnamHeritageLibrary } from './components/VietnamHeritageLibrary';
 import { TemplateGallery } from './components/TemplateGallery';
 import { KeywordsLibrary } from './components/KeywordsLibrary';
 import { PrintCalculator } from './components/PrintCalculator';
@@ -14,9 +15,20 @@ import brandEmblem from './assets/images/gemini_restore_emblem_1786650826371.jpg
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('builder');
   const [builderCategory, setBuilderCategory] = useState<RestorationCategory>('portrait');
+  const [injectedPromptVi, setInjectedPromptVi] = useState<string>('');
+  const [injectedPromptEn, setInjectedPromptEn] = useState<string>('');
+  const [injectedKeywords, setInjectedKeywords] = useState<string[]>([]);
 
   const handleUseTemplateInBuilder = (cat: RestorationCategory) => {
     setBuilderCategory(cat);
+    setActiveTab('builder');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleApplyHeritagePrompt = (promptVi: string, promptEn: string, keywords: string[]) => {
+    setInjectedPromptVi(promptVi);
+    setInjectedPromptEn(promptEn);
+    setInjectedKeywords(keywords);
     setActiveTab('builder');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -33,10 +45,22 @@ export default function App() {
 
         {/* Dynamic Tab Content */}
         {activeTab === 'builder' && (
-          <PromptBuilder initialCategory={builderCategory} />
+          <PromptBuilder
+            initialCategory={builderCategory}
+            initialPromptVi={injectedPromptVi}
+            initialPromptEn={injectedPromptEn}
+            initialKeywords={injectedKeywords.length > 0 ? injectedKeywords : undefined}
+          />
         )}
 
         {activeTab === 'analyzer' && <PhotoAnalyzer />}
+
+        {activeTab === 'vietnam-heritage' && (
+          <VietnamHeritageLibrary
+            onApplyPrompt={handleApplyHeritagePrompt}
+            onNavigateToBuilder={() => setActiveTab('builder')}
+          />
+        )}
 
         {activeTab === 'templates' && (
           <TemplateGallery onUseTemplate={handleUseTemplateInBuilder} />

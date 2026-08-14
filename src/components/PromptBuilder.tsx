@@ -6,29 +6,46 @@ import { Copy, Check, Sparkles, RefreshCw, Wand2 } from 'lucide-react';
 interface PromptBuilderProps {
   initialCategory?: RestorationCategory;
   onSelectCategory?: (cat: RestorationCategory) => void;
+  initialPromptVi?: string;
+  initialPromptEn?: string;
+  initialKeywords?: string[];
 }
 
-export const PromptBuilder: React.FC<PromptBuilderProps> = ({ initialCategory = 'portrait' }) => {
+export const PromptBuilder: React.FC<PromptBuilderProps> = ({
+  initialCategory = 'portrait',
+  initialPromptVi,
+  initialPromptEn,
+  initialKeywords
+}) => {
   const [category, setCategory] = useState<RestorationCategory>(initialCategory);
   const [selectedDamages, setSelectedDamages] = useState<string[]>(['scratches', 'yellowing', 'blur']);
   const [userNotes, setUserNotes] = useState<string>('Bức ảnh chân dung cũ gia đình chụp thập niên 1970');
   const [includeIdTuning, setIncludeIdTuning] = useState<boolean>(false);
   const [includeNoWatermark, setIncludeNoWatermark] = useState<boolean>(true);
-  const [selectedKeywords, setSelectedKeywords] = useState<string[]>([
-    'Preserve 100% original facial features',
-    'Natural skin texture',
-    '8K resolution',
-    'Ultra-sharp detail',
-    'No watermark, no logo, no signature'
-  ]);
+  const [selectedKeywords, setSelectedKeywords] = useState<string[]>(
+    initialKeywords || [
+      'Preserve 100% original facial features',
+      'Natural skin texture',
+      '8K resolution',
+      'Ultra-sharp detail',
+      'No watermark, no logo, no signature'
+    ]
+  );
 
   const [copiedVi, setCopiedVi] = useState(false);
   const [copiedEn, setCopiedEn] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
 
   // Custom prompt output state
-  const [customPromptVi, setCustomPromptVi] = useState<string>('');
-  const [customPromptEn, setCustomPromptEn] = useState<string>('');
+  const [customPromptVi, setCustomPromptVi] = useState<string>(initialPromptVi || '');
+  const [customPromptEn, setCustomPromptEn] = useState<string>(initialPromptEn || '');
+
+  // Synchronize when initial props change
+  React.useEffect(() => {
+    if (initialPromptVi) setCustomPromptVi(initialPromptVi);
+    if (initialPromptEn) setCustomPromptEn(initialPromptEn);
+    if (initialKeywords) setSelectedKeywords(initialKeywords);
+  }, [initialPromptVi, initialPromptEn, initialKeywords]);
 
   // Toggle damage selection
   const toggleDamage = (id: string) => {
