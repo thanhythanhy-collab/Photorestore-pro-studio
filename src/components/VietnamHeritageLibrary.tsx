@@ -48,7 +48,7 @@ export const VietnamHeritageLibrary: React.FC<VietnamHeritageLibraryProps> = ({
   const [composerAttire, setComposerAttire] = useState<string>('aodai_hanoi_silk');
   const [composerSetting, setComposerSetting] = useState<string>('setting_phoco_hanoi');
   const [composerTone, setComposerTone] = useState<string>('tone_kodak_tri_x_blackwhite');
-  const [composerProp, setComposerProp] = useState<string>('prop_quattre_nonla_khanran');
+  const [composerProp, setComposerProp] = useState<string>('prop_non_la_bai_tho_quat_nan');
   const [copiedComposer, setCopiedComposer] = useState(false);
 
   // Filter items
@@ -144,9 +144,9 @@ export const VietnamHeritageLibrary: React.FC<VietnamHeritageLibraryProps> = ({
             <span>Kho Tri Thức Văn Hóa & Nhân Học Lịch Sử Việt Nam</span>
           </div>
 
-          <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-zinc-100 uppercase font-sans">
+          <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-amber-50 uppercase font-serif-luxury">
             Thư Viện Trang Phục & Bối Cảnh Lịch Sử{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-100">
+            <span className="gold-gradient-text">
               (1950 – 1990)
             </span>
           </h2>
@@ -199,18 +199,34 @@ export const VietnamHeritageLibrary: React.FC<VietnamHeritageLibraryProps> = ({
               onChange={(e) => setComposerAttire(e.target.value)}
               className="w-full bg-[#081730] border border-zinc-700 text-xs text-zinc-200 rounded p-2.5 focus:border-amber-400 focus:outline-none"
             >
-              <optgroup label="Trang Phục Nữ">
+              <optgroup label="Trang Phục Nữ Truyền Thống">
                 <option value="aodai_hanoi_silk">Áo Dài Lụa Hà Đông (1950-1960)</option>
                 <option value="aodai_saigon_raglan">Áo Dài Raglan Sài Gòn (1960-1975)</option>
-                <option value="aobaba_southern_folk">Áo Bà Ba Nam Bộ & Khăn Rằn</option>
-                <option value="aotuthan_bacbo_heritage">Áo Tứ Thân & Nón Quai Thao Bắc Bộ</option>
-                <option value="nusinh_dongkhanh_school">Áo Dài Trắng Nữ Sinh Đồng Khánh</option>
+                <option value="aobaba_nam_bo_khanran">Áo Bà Ba Nam Bộ & Khăn Rằn</option>
+                <option value="aotu_than_kinhbac">Áo Tứ Thân & Nón Quai Thao Bắc Bộ</option>
+                <option value="aodai_nu_sinh_dongkhanh_hue">Áo Dài Trắng Nữ Sinh Đồng Khánh Huế</option>
+                <option value="aodai_nhung_gam_trungnien">Áo Dài Nhung Gấm Quý Bà Trọng Vọng</option>
+                <option value="trangphuc_nu_thanhnien_xungphong">Nữ Thanh Niên Xung Phong / Nữ Biệt Động</option>
+              </optgroup>
+              <optgroup label="Đám Cưới Xưa & Lễ Gia Tộc">
+                <option value="damcuoi_hanoi_baocap">Đám Cưới Bao Cấp Hà Nội (Hoa Lay-ơn)</option>
+                <option value="damcuoi_saigon_retrowestern">Đám Cưới Sài Gòn Retro Tân Thời</option>
+                <option value="lecuoi_truyenthong_aotathan_khanvan">Lễ Gia Tiên Áo Gấm Khăn Vành Cung Đình</option>
+                <option value="le_mungtho_chuctho_giatoc">Lễ Mừng Thọ Bát Tuần Đại Gia Đình</option>
+                <option value="chup_hinh_tet_nguyendan_xua">Chụp Hình Tết Nguyên Đán & Chợ Hoa Xưa</option>
+              </optgroup>
+              <optgroup label="Trang Phục Dân Tộc Tây Bắc & Tây Nguyên">
+                <option value="thocau_hmong_hoabinh_taybac">Thổ Cẩm H'Mông & Dao Đỏ Tây Bắc</option>
+                <option value="thocam_thai_den_trang_muong">Áo Cóm, Khăn Piêu & Cúc Bướm Bạc Thái</option>
+                <option value="thocam_taynguyen_edee_gairai">Thổ Cẩm Dân Tộc Ê-đê & Ba Na Tây Nguyên</option>
+                <option value="trangphuc_champa_ninhthuan">Áo Dài Truyền Thống Chăm Ninh Thuận</option>
               </optgroup>
               <optgroup label="Trang Phục Nam & Quân Phục">
                 <option value="quanphuc_bodoicuhu_khangchien">Quân Phục Bộ Đội Cụ Hồ Mũ Cối</option>
                 <option value="auphuc_trithuc_vintage">Âu Phục Trí Thức & Công Chức Xưa</option>
                 <option value="aodai_nam_nguthan">Áo Dài Ngũ Thân & Khăn Đóng Nam</option>
                 <option value="trangphuc_baocap_congnhan">Trang Phục Thời Bao Cấp (1975-1985)</option>
+                <option value="trangphuc_congnhan_nongtruong_lamnghiep">Thanh Niên Nông Trường & Thợ Mỏ</option>
               </optgroup>
             </select>
           </div>
@@ -226,9 +242,9 @@ export const VietnamHeritageLibrary: React.FC<VietnamHeritageLibraryProps> = ({
               onChange={(e) => setComposerProp(e.target.value)}
               className="w-full bg-[#081730] border border-zinc-700 text-xs text-zinc-200 rounded p-2.5 focus:border-amber-400 focus:outline-none"
             >
-              <option value="prop_quattre_nonla_khanran">Nón Lá Bài Thơ & Quạt Nan Tre</option>
-              <option value="prop_xedap_phuonghoang">Xe Đạp Phượng Hoàng Cánh Én</option>
-              <option value="prop_xe_vespa_sprint_mobylette">Xe Cổ Vespa Sprint / Honda Dame</option>
+              <option value="prop_non_la_bai_tho_quat_nan">Nón Lá Bài Thơ Xứ Huế & Quạt Nan Tre</option>
+              <option value="prop_xe_dap_phuonghoang_supercub">Xe Đạp Phượng Hoàng & Honda Super Cub 81</option>
+              <option value="prop_xe_vespa_lambretta_cophuong">Xe Tay Ga Vespa Sprint & Lambretta Cổ</option>
               <option value="prop_dai_radio_cassette_national">Đài Radio National & Phích Rạng Đông</option>
             </select>
           </div>
@@ -244,10 +260,11 @@ export const VietnamHeritageLibrary: React.FC<VietnamHeritageLibraryProps> = ({
               onChange={(e) => setComposerSetting(e.target.value)}
               className="w-full bg-[#081730] border border-zinc-700 text-xs text-zinc-200 rounded p-2.5 focus:border-amber-400 focus:outline-none"
             >
-              <option value="setting_phoco_hanoi">Phố Cổ Hà Nội Tường Vàng Vôi</option>
-              <option value="setting_saigon_retrostreet">Đường Phố Sài Gòn Xưa 1960-1970</option>
-              <option value="setting_langque_dongbang">Làng Quê Bắc Bộ & Nhà 3 Gian</option>
-              <option value="setting_studio_vintage_phongnhung">Studio Ảnh Viện Xưa Phông Màn Nhung</option>
+              <option value="setting_phoco_hanoi">Phố Cổ Hà Nội Tường Vôi Vàng & Mái Ngói Rêu</option>
+              <option value="setting_saigon_honngocvienthai">Sài Gòn Hòn Ngọc Viễn Đông & Chợ Bến Thành</option>
+              <option value="setting_langque_dongbang_bacbo">Làng Quê Bắc Bộ (Cây Đa, Sân Đình & Giếng Làng)</option>
+              <option value="setting_songnuoc_chonoimientay">Chợ Nổi Sông Nước Miền Tây & Dừa Nước</option>
+              <option value="setting_codohue_songhuong_kinhthanh">Cố Đô Huế, Ngọ Môn & Sông Hương Trầm Mặc</option>
             </select>
           </div>
 
@@ -353,10 +370,12 @@ export const VietnamHeritageLibrary: React.FC<VietnamHeritageLibraryProps> = ({
               onChange={(e) => setSelectedRegion(e.target.value)}
               className="w-full bg-[#081833] border border-zinc-700 text-xs text-zinc-200 rounded p-2 focus:border-amber-400 focus:outline-none"
             >
-              <option value="all">Tất Cả Vùng Miền (Bắc - Trung - Nam)</option>
+              <option value="all">Tất Cả Vùng Miền (3 Miền & Tây Bắc / Tây Nguyên)</option>
               <option value="North">Miền Bắc & Hà Nội</option>
               <option value="Central">Miền Trung & Cố Đô Huế</option>
               <option value="South">Miền Nam & Sài Gòn</option>
+              <option value="Northwest">Tây Bắc & Đông Bắc (H'Mông, Dao, Thái)</option>
+              <option value="Highlands">Tây Nguyên Đại Ngàn (Ê Đê, Ba Na)</option>
               <option value="Nationwide">Toàn Quốc</option>
             </select>
           </div>

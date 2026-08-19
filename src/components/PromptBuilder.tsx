@@ -128,9 +128,11 @@ export const PromptBuilder: React.FC<PromptBuilderProps> = ({
     setCustomPromptEn(fullEn);
   };
 
-  // Run initial build if empty
+  // Run initial build if custom prompt is not already present or on explicit category changes
   React.useEffect(() => {
-    buildFallbackPrompt();
+    if (!initialPromptVi && !customPromptVi) {
+      buildFallbackPrompt();
+    }
   }, [category]);
 
   const copyToClipboard = (text: string, type: 'vi' | 'en') => {
@@ -145,39 +147,45 @@ export const PromptBuilder: React.FC<PromptBuilderProps> = ({
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Title & Description */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h2 className="text-2xl font-light tracking-tight text-zinc-100 flex items-center gap-2">
-            <Wand2 className="w-5 h-5 text-zinc-400" />
-            <span>Công Cụ Tùy Biến Master Prompt 4 Thành Phần</span>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#050e1f]/90 border border-amber-500/30 rounded-sm p-4 sm:p-6 shadow-xl relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative z-10">
+          <div className="flex items-center gap-2 text-amber-400 text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-1 font-mono">
+            <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+            <span>Xưởng Kiến Tạo Master Prompt • Studio Generator</span>
+          </div>
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-amber-100 flex items-center gap-2 font-serif-luxury">
+            <Wand2 className="w-5 h-5 text-amber-400 shrink-0" />
+            <span>Tùy Biến Master Prompt 4 Thành Phần Chuẩn Pro</span>
           </h2>
-          <p className="text-sm text-zinc-500 mt-1 font-light">
-            Chọn thể loại, tích chọn tình trạng tổn hại ảnh và từ khóa kỹ thuật để tạo ngay prompt tối ưu cho Gemini.
+          <p className="text-xs sm:text-sm text-zinc-300 mt-1 font-light max-w-2xl">
+            Tổ hợp tình trạng hư tổn, đặc điểm nhận dạng nhân học và từ khóa quang học vi mô để tạo ra prompt AI hoàn mỹ nhất.
           </p>
         </div>
 
         <button
           onClick={handleGeneratePrompt}
           disabled={isGenerating}
-          className="inline-flex items-center gap-2 h-11 px-6 bg-zinc-100 hover:bg-zinc-200 text-black text-xs font-bold uppercase tracking-widest transition-all cursor-pointer disabled:opacity-50 rounded-sm"
+          className="inline-flex items-center justify-center gap-2 h-11 px-6 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-black text-xs font-bold uppercase tracking-wider transition-all cursor-pointer disabled:opacity-50 rounded-sm shadow-lg shadow-amber-500/20 shrink-0 font-mono"
         >
           {isGenerating ? (
-            <RefreshCw className="w-4 h-4 animate-spin" />
+            <RefreshCw className="w-4 h-4 animate-spin text-black" />
           ) : (
-            <Sparkles className="w-4 h-4" />
+            <Sparkles className="w-4 h-4 text-black" />
           )}
-          <span>{isGenerating ? 'Đang tạo bằng Gemini AI...' : 'Tạo Master Prompt Pro'}</span>
+          <span>{isGenerating ? 'AI Đang Xử Lý...' : 'Tạo Master Prompt Pro'}</span>
         </button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
         {/* Left Column: Input Form (5 cols) */}
-        <div className="lg:col-span-5 space-y-6 bg-[#0d0d0d] border border-zinc-800 rounded-sm p-6">
+        <div className="lg:col-span-5 space-y-5 bg-[#050f24] border border-amber-500/25 rounded-sm p-4 sm:p-6 shadow-xl">
           {/* 1. Category Selection */}
           <div>
-            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">
+            <label className="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-2 font-mono">
               1. Thể Loại Ảnh Cần Phục Hồi
             </label>
             <div className="grid grid-cols-2 gap-2">
@@ -193,8 +201,8 @@ export const PromptBuilder: React.FC<PromptBuilderProps> = ({
                   onClick={() => setCategory(cat.id as RestorationCategory)}
                   className={`px-3 py-2.5 text-xs font-medium text-left transition-all cursor-pointer border rounded-sm ${
                     category === cat.id
-                      ? 'bg-zinc-800/80 border-l-2 border-l-zinc-100 border-zinc-700 text-zinc-100 font-bold'
-                      : 'bg-[#141414] border-zinc-800/80 text-zinc-400 hover:border-zinc-700'
+                      ? 'bg-[#0a2046] border-amber-400 text-amber-200 font-bold shadow-md shadow-amber-500/10'
+                      : 'bg-[#030914] border-zinc-800/80 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'
                   }`}
                 >
                   {cat.label}
@@ -205,7 +213,7 @@ export const PromptBuilder: React.FC<PromptBuilderProps> = ({
 
           {/* 2. Damage Selection */}
           <div>
-            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">
+            <label className="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-2 font-mono">
               2. Chọn Tổn Hại Của Bức Ảnh (Khử Nhiễu AI)
             </label>
             <div className="space-y-2">
@@ -217,19 +225,19 @@ export const PromptBuilder: React.FC<PromptBuilderProps> = ({
                     onClick={() => toggleDamage(dmg.id)}
                     className={`flex items-start gap-3 p-2.5 rounded-sm border text-xs cursor-pointer transition-all ${
                       isSelected
-                        ? 'bg-zinc-900 border-zinc-700 text-zinc-100'
-                        : 'bg-[#141414] border-zinc-800/80 text-zinc-400 hover:border-zinc-700'
+                        ? 'bg-[#081b38] border-amber-500/50 text-amber-100 shadow-sm'
+                        : 'bg-[#030914] border-zinc-800/80 text-zinc-400 hover:border-zinc-700'
                     }`}
                   >
                     <input
                       type="checkbox"
                       checked={isSelected}
                       onChange={() => {}}
-                      className="mt-0.5 border-zinc-700 bg-zinc-900 text-zinc-100 focus:ring-zinc-700"
+                      className="mt-0.5 border-amber-500/50 bg-[#061226] text-amber-400 focus:ring-amber-400 rounded-sm"
                     />
                     <div>
-                      <span className="font-medium text-zinc-200 block">{dmg.label}</span>
-                      <span className="text-[11px] text-zinc-500 font-light">{dmg.description}</span>
+                      <span className="font-semibold text-zinc-100 block">{dmg.label}</span>
+                      <span className="text-[11px] text-zinc-400 font-light">{dmg.description}</span>
                     </div>
                   </label>
                 );
@@ -239,17 +247,17 @@ export const PromptBuilder: React.FC<PromptBuilderProps> = ({
 
           {/* ID Photo Studio Tuning option (Only for portrait) */}
           {category === 'portrait' && (
-            <div className="bg-[#141414] border border-zinc-800 rounded-sm p-3.5">
+            <div className="bg-[#030914] border border-amber-500/20 rounded-sm p-3.5">
               <label className="flex items-center gap-3 text-xs text-zinc-200 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={includeIdTuning}
                   onChange={(e) => setIncludeIdTuning(e.target.checked)}
-                  className="border-zinc-700 bg-zinc-900 text-zinc-100 focus:ring-zinc-700"
+                  className="border-zinc-700 bg-zinc-900 text-amber-400 focus:ring-amber-400 rounded-sm"
                 />
                 <div>
-                  <span className="font-semibold text-zinc-200">Thêm Tùy Chỉnh Ảnh Thẻ Chuyên Nghiệp</span>
-                  <p className="text-[11px] text-zinc-500 mt-0.5 font-light">
+                  <span className="font-semibold text-zinc-100">Thêm Tùy Chỉnh Ảnh Thẻ Chuyên Nghiệp</span>
+                  <p className="text-[11px] text-zinc-400 mt-0.5 font-light">
                     Ánh sáng studio cân đối, làm gọn tóc rối, mắt nhìn thẳng nhẹ nhàng.
                   </p>
                 </div>
@@ -258,48 +266,83 @@ export const PromptBuilder: React.FC<PromptBuilderProps> = ({
           )}
 
           {/* Guaranteed No Watermark Option */}
-          <div className="bg-[#141414] border border-zinc-800 rounded-sm p-3.5">
+          <div className="bg-[#030914] border border-emerald-500/30 rounded-sm p-3.5">
             <label className="flex items-center gap-3 text-xs text-zinc-200 cursor-pointer">
               <input
                 type="checkbox"
                 checked={includeNoWatermark}
                 onChange={(e) => setIncludeNoWatermark(e.target.checked)}
-                className="border-zinc-700 bg-zinc-900 text-zinc-100 focus:ring-zinc-700"
+                className="border-zinc-700 bg-zinc-900 text-emerald-400 focus:ring-emerald-400 rounded-sm"
               />
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="font-semibold text-zinc-200">Khóa Lệnh Xuất 100% Không Dính Watermark</span>
-                  <span className="text-[9px] font-mono uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.5 rounded-sm">No Watermark</span>
+                  <span className="font-semibold text-zinc-100">Khóa Lệnh Xuất 100% Không Dính Watermark</span>
+                  <span className="text-[9px] font-mono uppercase bg-emerald-500/15 text-emerald-300 border border-emerald-500/40 px-1.5 py-0.5 rounded-sm">No Watermark</span>
                 </div>
-                <p className="text-[11px] text-zinc-500 mt-0.5 font-light">
+                <p className="text-[11px] text-zinc-400 mt-0.5 font-light">
                   Chèn lệnh cấm AI gắn logo, dấu chìm bản quyền, chữ ký hay viền trang trí giả.
                 </p>
               </div>
             </label>
           </div>
 
+          {/* Quick Pro 5-Mastery Presets Injector */}
+          <div className="bg-gradient-to-br from-[#061836] via-[#041024] to-[#020712] border border-amber-400/40 rounded-sm p-4 space-y-2.5 shadow-lg">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1.5 font-mono">
+                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                <span>5 Kỹ Thuật Vi Mô Đỉnh Cao (1-Click)</span>
+              </span>
+              <span className="text-[9px] bg-amber-400/20 text-amber-300 border border-amber-400/40 px-1.5 py-0.5 rounded font-mono font-bold">PRO STUDIO</span>
+            </div>
+            <p className="text-[11px] text-zinc-300 font-light leading-relaxed">
+              Tự động chèn: Vân da vi mô (SSS), ánh nhìn giác mạc (Catchlight), hạt phim 35mm bạc muối, vân dệt vải và căn màu in Lab CMYK 300 DPI.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                const proKeywords = [
+                  'Preserve 100% original facial features',
+                  'Organic skin micro-texture',
+                  'Subsurface scattering SSS',
+                  'Sharp iris geometry & catchlight',
+                  '35mm organic film grain',
+                  'Microscopic fabric weave',
+                  'Calibrated CMYK print proofing',
+                  '8K resolution',
+                  'No watermark, no logo, no signature'
+                ];
+                setSelectedKeywords(proKeywords);
+              }}
+              className="w-full py-2 px-3 bg-amber-400/15 hover:bg-amber-400/25 text-amber-200 border border-amber-400/50 text-xs font-semibold rounded-sm cursor-pointer transition-all shadow-sm flex items-center justify-center gap-1.5"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <span>Áp Dụng Trọn Bộ 5 Kỹ Thuật Vi Mô Vào Prompt</span>
+            </button>
+          </div>
+
           {/* 3. User Notes */}
           <div>
-            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">
+            <label className="block text-[11px] font-bold text-amber-300 uppercase tracking-widest mb-2 font-mono">
               3. Ghi Chú Đặc Điểm Nhận Dạng / Bối Cảnh Gốc
             </label>
             <textarea
               value={userNotes}
               onChange={(e) => setUserNotes(e.target.value)}
-              placeholder="Ví dụ: Ảnh cụ bà mặc áo dài gấm đỏ, đeo dây chuyền vàng, tóc búi cao..."
+              placeholder="Ví dụ: Ảnh cụ bà mặc áo dài lụa Hà Đông màu mỡ gà, đeo kiềng bạc, tóc vấn khăn..."
               rows={3}
-              className="w-full bg-[#141414] border border-zinc-800 rounded-sm p-3 text-xs text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-zinc-700 transition-all resize-none font-light"
+              className="w-full bg-[#030914] border border-zinc-800 rounded-sm p-3 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-all resize-none font-light"
             />
           </div>
 
           {/* 4. English Keywords Chips */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
-                4. Từ Khóa Tiếng Anh Bổ Sung
+              <label className="text-[11px] font-bold text-amber-300 uppercase tracking-widest font-mono">
+                4. Từ Khóa Kỹ Thuật Tiếng Anh
               </label>
-              <span className="text-[10px] text-zinc-500 font-mono">
-                {selectedKeywords.length} SELECTED
+              <span className="text-[10px] text-zinc-400 font-mono">
+                {selectedKeywords.length} ĐÃ CHỌN
               </span>
             </div>
             <div className="flex flex-wrap gap-1.5 max-h-40 overflow-y-auto no-scrollbar p-1">
@@ -312,8 +355,8 @@ export const PromptBuilder: React.FC<PromptBuilderProps> = ({
                     onClick={() => toggleKeyword(kw.en)}
                     className={`px-2 py-1 rounded-sm text-[10px] font-mono border transition-all cursor-pointer ${
                       isSel
-                        ? 'bg-zinc-800 border-zinc-600 text-zinc-100 font-bold'
-                        : 'bg-[#141414] border-zinc-800 text-zinc-400 hover:text-zinc-200'
+                        ? 'bg-[#081e42] border-amber-400 text-amber-200 font-bold shadow-sm'
+                        : 'bg-[#030914] border-zinc-800 text-zinc-400 hover:text-zinc-200 hover:border-zinc-700'
                     }`}
                   >
                     {isSel ? '✓ ' : '+ '}
@@ -328,54 +371,54 @@ export const PromptBuilder: React.FC<PromptBuilderProps> = ({
         {/* Right Column: Prompt Output Box (7 cols) */}
         <div className="lg:col-span-7 space-y-6">
           {/* Vietnamese Master Prompt Box */}
-          <div className="bg-[#0d0d0d] border border-zinc-800 rounded-sm p-6 relative">
-            <div className="flex items-center justify-between mb-3 border-b border-zinc-800 pb-3">
+          <div className="bg-[#050f24] border border-amber-500/30 rounded-sm p-4 sm:p-6 relative shadow-xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3 border-b border-amber-500/20 pb-3">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-200">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                <h3 className="text-sm font-bold uppercase tracking-wider text-amber-200 font-serif-luxury">
                   Master Prompt Tiếng Việt (Chuẩn 4 Thành Phần)
                 </h3>
               </div>
 
               <button
                 onClick={() => copyToClipboard(customPromptVi, 'vi')}
-                className="inline-flex items-center gap-1.5 h-8 px-3.5 bg-zinc-100 hover:bg-zinc-200 text-black rounded-sm text-xs font-bold uppercase tracking-wider transition-all cursor-pointer"
+                className="inline-flex items-center justify-center gap-1.5 h-8 px-4 bg-amber-400 hover:bg-amber-300 text-black rounded-sm text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-md shadow-amber-500/20"
               >
                 {copiedVi ? <Check className="w-3.5 h-3.5 text-black" /> : <Copy className="w-3.5 h-3.5" />}
-                <span>{copiedVi ? 'Đã Sao Chép!' : 'Sao Chép Text'}</span>
+                <span>{copiedVi ? 'Đã Sao Chép!' : 'Sao Chép Prompt VI'}</span>
               </button>
             </div>
 
-            <div className="bg-[#0a0a0a] border border-zinc-800 p-4 font-mono text-xs sm:text-sm text-zinc-300 whitespace-pre-wrap leading-relaxed max-h-80 overflow-y-auto rounded-sm">
+            <div className="bg-[#020611] border border-zinc-800 p-4 font-mono text-xs sm:text-sm text-zinc-200 whitespace-pre-wrap leading-relaxed max-h-80 overflow-y-auto rounded-sm select-all">
               {customPromptVi}
             </div>
 
-            <div className="mt-3 flex items-center justify-between text-[10px] text-zinc-500">
-              <span>Được thiết kế tối ưu hóa cho Gemini 3.6 Flash & Image models</span>
-              <span className="text-zinc-400 font-mono uppercase">Structure: 4-Part Approved</span>
+            <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-[10px] text-zinc-400 font-mono">
+              <span>Tối ưu hóa cho Gemini 3.6 Vision & Nano/Pro engines</span>
+              <span className="text-amber-300 font-bold uppercase">CẤU TRÚC 4 THÀNH PHẦN HOÀN CHỈNH</span>
             </div>
           </div>
 
           {/* English Master Prompt Box */}
-          <div className="bg-[#0d0d0d] border border-zinc-800 rounded-sm p-6">
-            <div className="flex items-center justify-between mb-3 border-b border-zinc-800 pb-3">
+          <div className="bg-[#050f24] border border-zinc-800 rounded-sm p-4 sm:p-6 shadow-xl">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3 border-b border-zinc-800 pb-3">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-zinc-400" />
-                <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-200">
+                <span className="w-2.5 h-2.5 rounded-full bg-sky-400" />
+                <h3 className="text-sm font-bold uppercase tracking-wider text-sky-200 font-mono">
                   English Technical Prompt (AI Engine Optimized)
                 </h3>
               </div>
 
               <button
                 onClick={() => copyToClipboard(customPromptEn, 'en')}
-                className="inline-flex items-center gap-1.5 h-8 px-3.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-200 rounded-sm text-xs font-bold uppercase tracking-wider transition-all cursor-pointer"
+                className="inline-flex items-center justify-center gap-1.5 h-8 px-4 bg-[#081836] hover:bg-[#0c234f] border border-amber-500/40 text-amber-200 rounded-sm text-xs font-bold uppercase tracking-wider transition-all cursor-pointer"
               >
                 {copiedEn ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                <span>{copiedEn ? 'Copied!' : 'Copy English'}</span>
+                <span>{copiedEn ? 'Copied!' : 'Copy English Prompt'}</span>
               </button>
             </div>
 
-            <div className="bg-[#0a0a0a] border border-zinc-800 p-4 font-mono text-xs text-zinc-400 whitespace-pre-wrap leading-relaxed max-h-64 overflow-y-auto rounded-sm">
+            <div className="bg-[#020611] border border-zinc-800 p-4 font-mono text-xs text-zinc-300 whitespace-pre-wrap leading-relaxed max-h-64 overflow-y-auto rounded-sm select-all">
               {customPromptEn}
             </div>
           </div>
